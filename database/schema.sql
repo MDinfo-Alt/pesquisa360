@@ -51,3 +51,34 @@ CREATE TABLE entrevistas (
         FOREIGN KEY (contato_id)
         REFERENCES contatos(id)
 );
+
+CREATE TABLE categorias_perguntas (
+    id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    ativo BOOLEAN NOT NULL DEFAULT TRUE
+);
+
+CREATE TABLE perguntas (
+    id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    categoria_id INTEGER NOT NULL,
+    texto TEXT NOT NULL,
+    tipo_resposta VARCHAR(30) NOT NULL,
+    ordem INTEGER NOT NULL,
+    ativa BOOLEAN NOT NULL DEFAULT TRUE,
+
+    CONSTRAINT fk_perguntas_categoria
+        FOREIGN KEY (categoria_id)
+        REFERENCES categorias_perguntas(id)
+);
+
+CREATE TABLE opcoes_perguntas (
+    id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    pergunta_id INTEGER NOT NULL,
+    texto VARCHAR(150) NOT NULL,
+    ordem INTEGER NOT NULL,
+    ativa BOOLEAN NOT NULL DEFAULT TRUE,
+
+    CONSTRAINT fk_opcoes_perguntas_pergunta
+        FOREIGN KEY (pergunta_id)
+        REFERENCES perguntas(id)
+);

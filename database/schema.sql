@@ -1,0 +1,2 @@
+-- Pesquisa360
+-- Schema inicial do banco de dados

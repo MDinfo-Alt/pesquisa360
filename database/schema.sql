@@ -82,3 +82,36 @@ CREATE TABLE opcoes_perguntas (
         FOREIGN KEY (pergunta_id)
         REFERENCES perguntas(id)
 );
+
+CREATE TABLE respostas (
+    id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    entrevista_id INTEGER NOT NULL,
+    pergunta_id INTEGER NOT NULL,
+    valor TEXT,
+
+    CONSTRAINT fk_respostas_entrevista
+        FOREIGN KEY (entrevista_id)
+        REFERENCES entrevistas(id),
+
+    CONSTRAINT fk_respostas_pergunta
+        FOREIGN KEY (pergunta_id)
+        REFERENCES perguntas(id),
+
+    CONSTRAINT uq_resposta_entrevista_pergunta
+        UNIQUE (entrevista_id, pergunta_id)
+);
+
+CREATE TABLE opcoes_respostas (
+    resposta_id INTEGER NOT NULL,
+    opcao_pergunta_id INTEGER NOT NULL,
+
+    PRIMARY KEY (resposta_id, opcao_pergunta_id),
+
+    CONSTRAINT fk_opcoes_respostas_resposta
+        FOREIGN KEY (resposta_id)
+        REFERENCES respostas(id),
+
+    CONSTRAINT fk_opcoes_respostas_opcao
+        FOREIGN KEY (opcao_pergunta_id)
+        REFERENCES opcoes_perguntas(id)
+);

@@ -1,2 +1,17 @@
-# pesquisa360
-Plataforma para pesquisa e análise de dores de pequenos negócios.
+# Pesquisa360
+
+## Sobre o projeto
+
+## Problema
+
+## Objetivo
+
+## Público-alvo
+
+## Escopo inicial (MVP)
+
+## Funcionalidades previstas
+
+## Tecnologias
+
+## Status do projeto

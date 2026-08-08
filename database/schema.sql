@@ -115,3 +115,71 @@ CREATE TABLE opcoes_respostas (
         FOREIGN KEY (opcao_pergunta_id)
         REFERENCES opcoes_perguntas(id)
 );
+
+CREATE TABLE categorias_dores (
+    id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    ativo BOOLEAN NOT NULL DEFAULT TRUE
+);
+
+CREATE TABLE dores (
+    id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    entrevista_id INTEGER NOT NULL,
+    categoria_id INTEGER NOT NULL,
+    titulo VARCHAR(150) NOT NULL,
+    descricao TEXT,
+    frequencia VARCHAR(30),
+    impacto VARCHAR(30),
+    solucao_atual TEXT,
+    observacoes TEXT,
+
+    CONSTRAINT fk_dores_entrevista
+        FOREIGN KEY (entrevista_id)
+        REFERENCES entrevistas(id),
+
+    CONSTRAINT fk_dores_categoria
+        FOREIGN KEY (categoria_id)
+        REFERENCES categorias_dores(id)
+);
+
+CREATE TABLE solucoes (
+    id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    nome VARCHAR(150) NOT NULL,
+    descricao TEXT,
+    funcionamento_proposto TEXT,
+    beneficio_esperado TEXT,
+    complexidade VARCHAR(30),
+    observacoes TEXT
+);
+
+CREATE TABLE dores_solucoes (
+    dor_id INTEGER NOT NULL,
+    solucao_id INTEGER NOT NULL,
+
+    PRIMARY KEY (dor_id, solucao_id),
+
+    CONSTRAINT fk_dores_solucoes_dor
+        FOREIGN KEY (dor_id)
+        REFERENCES dores(id),
+
+    CONSTRAINT fk_dores_solucoes_solucao
+        FOREIGN KEY (solucao_id)
+        REFERENCES solucoes(id)
+);
+
+CREATE TABLE empresas_solucoes (
+    empresa_id INTEGER NOT NULL,
+    solucao_id INTEGER NOT NULL,
+    status VARCHAR(30),
+    observacoes TEXT,
+
+    PRIMARY KEY (empresa_id, solucao_id),
+
+    CONSTRAINT fk_empresas_solucoes_empresa
+        FOREIGN KEY (empresa_id)
+        REFERENCES empresas(id),
+
+    CONSTRAINT fk_empresas_solucoes_solucao
+        FOREIGN KEY (solucao_id)
+        REFERENCES solucoes(id)
+);

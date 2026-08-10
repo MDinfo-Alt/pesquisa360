@@ -16,7 +16,10 @@ CREATE TABLE empresas (
     bairro VARCHAR(100),
     cidade VARCHAR(100),
     site VARCHAR(255),
-    status VARCHAR(30),
+    instagram VARCHAR(255),
+    qtd_funcionarios INTEGER,
+    observacoes TEXT,
+    status VARCHAR(30) NOT NULL DEFAULT 'PROSPECTADO',
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
@@ -29,6 +32,9 @@ CREATE TABLE contatos (
     empresa_id INTEGER NOT NULL,
     nome VARCHAR(150) NOT NULL,
     cargo VARCHAR(100),
+    telefone_whatsapp VARCHAR(30),
+    email VARCHAR(150),
+    observacoes TEXT,
 
     CONSTRAINT fk_contatos_empresa
         FOREIGN KEY (empresa_id)
@@ -149,7 +155,8 @@ CREATE TABLE solucoes (
     funcionamento_proposto TEXT,
     beneficio_esperado TEXT,
     complexidade VARCHAR(30),
-    observacoes TEXT
+    observacoes TEXT,
+    status VARCHAR(30) NOT NULL DEFAULT 'IDEIA'
 );
 
 CREATE TABLE dores_solucoes (

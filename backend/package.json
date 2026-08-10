@@ -1,0 +1,23 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "API do Pesquisa360",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "test": "node --test",
+    "db:schema": "node scripts/run-sql.js ../database/schema.sql",
+    "db:ajustes": "node scripts/run-sql.js ../database/002-ajustes.sql",
+    "db:seed": "node scripts/run-sql.js ../database/seed.sql"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "fastify": "^5.11.3",
+    "pg": "^8.23.0"
+  }
+}

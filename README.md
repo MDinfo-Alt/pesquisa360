@@ -31,6 +31,76 @@ O MVP deverá permitir:
 O sistema será inicialmente utilizado pelo próprio pesquisador como ferramenta interna para organizar as visitas e apoiar a identificação de oportunidades de desenvolvimento de soluções digitais.
 ## Funcionalidades previstas
 
+- Cadastro de empresas, com segmentos flexíveis e alerta de duplicidade (RF01)
+- Cadastro de contatos por empresa (RF02)
+- Registro de entrevistas com respostas às perguntas da pesquisa (RF03)
+- Registro de dores por entrevista (RF04)
+- Registro de soluções digitais ligadas às dores (RF05)
+
 ## Tecnologias
 
+- Node.js + Fastify (API REST)
+- PostgreSQL (`pg`)
+
+## Como executar
+
+Pré-requisitos: Node.js 20+ e PostgreSQL.
+
+```bash
+cd backend
+npm install
+cp .env.example .env      # ajuste usuário/senha do Postgres
+```
+
+Crie o banco `pesquisa360` no Postgres e então:
+
+```bash
+npm run db:schema   # cria as tabelas (banco novo)
+npm run db:ajustes  # só se o banco foi criado antes destas colunas
+npm run db:seed     # segmentos, categorias e perguntas iniciais
+npm run dev         # http://localhost:3333
+npm test
+```
+
+Verificação rápida: `GET http://localhost:3333/db-health`.
+
+## API
+
+| Método | Rota | Descrição |
+|---|---|---|
+| GET | `/empresas?busca=&status=&segmento_id=` | Lista empresas |
+| GET | `/empresas/:id` | Empresa com contatos e entrevistas |
+| POST | `/empresas` | Cadastra (409 em possível duplicidade; reenvie com `permitir_duplicado: true`) |
+| PATCH | `/empresas/:id` | Atualiza campos, inclusive o status |
+| GET/POST | `/empresas/:id/contatos` | Contatos da empresa |
+| PATCH | `/contatos/:id` | Atualiza contato |
+| GET | `/perguntas` | Perguntas ativas, na ordem, com opções |
+| GET | `/empresas/:id/entrevistas` | Entrevistas da empresa |
+| GET | `/entrevistas/:id` | Entrevista com respostas e dores |
+| POST | `/entrevistas` | Registra entrevista + respostas (transação) |
+| GET | `/dores?empresa_id=&entrevista_id=&categoria_id=` | Lista dores |
+| GET | `/dores/:id` | Dor com soluções relacionadas |
+| POST | `/dores` | Registra dor |
+| GET/POST | `/solucoes` | Soluções e suas dores |
+| PATCH | `/solucoes/:id` | Atualiza status da solução |
+| GET/POST | `/segmentos`, `/categorias_dores`, `/categorias_perguntas` | Listas de apoio |
+
+Exemplo de entrevista:
+
+```json
+{
+  "empresa_id": 1,
+  "contato_id": 1,
+  "data_entrevista": "2026-08-09",
+  "observacoes": "visita presencial",
+  "respostas": [
+    { "pergunta_id": 1, "valor": "Anotando em caderno" },
+    { "pergunta_id": 5, "valor": "NAO" },
+    { "pergunta_id": 6, "opcoes": [1, 3] }
+  ]
+}
+```
+
 ## Status do projeto
+
+MVP em desenvolvimento. Backend funcional (RF01 a RF05); interface ainda não iniciada.

@@ -42,6 +42,43 @@ export function validarResposta({ tipo_resposta, texto }, resposta) {
 
 export default async function entrevistasRoutes(app) {
 
+    // Todas as entrevistas — a tela de acompanhamento das visitas.
+    app.get(
+        "/entrevistas",
+        {
+            schema: {
+                querystring: {
+                    type: "object",
+                    properties: { empresa_id: { type: "integer" } }
+                }
+            }
+        },
+        async (request) => {
+            const result = await pool.query(
+                `
+                SELECT
+                    e.id,
+                    e.data_entrevista,
+                    e.observacoes,
+                    emp.id AS empresa_id,
+                    emp.nome AS empresa,
+                    c.nome AS contato,
+                    COUNT(d.id)::int AS total_dores
+                FROM entrevistas e
+                JOIN empresas emp ON emp.id = e.empresa_id
+                LEFT JOIN contatos c ON c.id = e.contato_id
+                LEFT JOIN dores d ON d.entrevista_id = e.id
+                WHERE ($1::int IS NULL OR emp.id = $1)
+                GROUP BY e.id, emp.id, c.nome
+                ORDER BY e.data_entrevista DESC, e.id DESC
+                `,
+                [request.query.empresa_id ?? null]
+            );
+
+            return result.rows;
+        }
+    );
+
     app.get("/empresas/:empresaId/entrevistas", { schema: { params: idParam("empresaId") } }, async (request) => {
         const result = await pool.query(
             `

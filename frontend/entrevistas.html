@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pesquisa360 — Entrevistas</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>
+            <a href="index.html">Pesquisa360</a>
+            <nav>
+                <a href="index.html">Empresas</a>
+                <a href="entrevistas.html" aria-current="page">Entrevistas</a>
+                <a href="solucoes.html">Soluções</a>
+            </nav>
+        </h1>
+    </header>
+
+    <main>
+        <section>
+            <h2>Entrevistas realizadas</h2>
+
+            <div class="filtros">
+                <select id="filtro-empresa"></select>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Data</th>
+                        <th>Empresa</th>
+                        <th>Entrevistado</th>
+                        <th>Dores</th>
+                        <th>Observações</th>
+                    </tr>
+                </thead>
+                <tbody id="lista"></tbody>
+            </table>
+
+            <p id="aviso" hidden></p>
+        </section>
+    </main>
+
+    <script type="module" src="entrevistas.js"></script>
+</body>
+</html>

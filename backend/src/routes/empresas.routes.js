@@ -212,4 +212,30 @@ export default async function empresasRoutes(app) {
             return result.rows[0];
         }
     );
+
+    // Correção de cadastro errado. As FKs não são CASCADE de propósito:
+    // apagar uma empresa com entrevistas levaria junto respostas e dores.
+    app.delete("/empresas/:id", { schema: { params: idParam() } }, async (request, reply) => {
+        try {
+            const result = await pool.query(
+                "DELETE FROM empresas WHERE id = $1 RETURNING id",
+                [request.params.id]
+            );
+
+            if (result.rows.length === 0) {
+                return reply.code(404).send({ message: "Empresa não encontrada" });
+            }
+
+            return reply.code(204).send();
+        } catch (error) {
+            if (error.code === "23503") {
+                return reply.code(409).send({
+                    message:
+                        "Empresa tem contatos ou entrevistas registrados. Exclua-os antes."
+                });
+            }
+
+            throw error;
+        }
+    });
 }

@@ -41,6 +41,7 @@ O sistema será inicialmente utilizado pelo próprio pesquisador como ferramenta
 
 - Node.js + Fastify (API REST)
 - PostgreSQL (`pg`)
+- Interface em HTML, CSS e JavaScript puro, servida pelo próprio Fastify (`@fastify/static`)
 
 ## Como executar
 
@@ -62,7 +63,17 @@ npm run dev         # http://localhost:3333
 npm test
 ```
 
-Verificação rápida: `GET http://localhost:3333/db-health`.
+A interface abre em `http://localhost:3333`. Verificação rápida da API: `GET http://localhost:3333/db-health`.
+
+## Telas
+
+| Tela | Arquivo | O que faz |
+|---|---|---|
+| Empresas | `index.html` | Lista com busca e filtros, cadastro e exclusão |
+| Empresa | `empresa.html?id=` | Dados, troca de status, contatos e entrevistas |
+| Nova entrevista | `nova-entrevista.html?empresa=` | Questionário montado a partir de `/perguntas` |
+| Entrevista | `entrevista.html?id=` | Respostas registradas e cadastro de dores |
+| Soluções | `solucoes.html` | Cadastro ligado às dores e acompanhamento do status |
 
 ## API
 
@@ -83,6 +94,7 @@ Verificação rápida: `GET http://localhost:3333/db-health`.
 | POST | `/dores` | Registra dor |
 | GET/POST | `/solucoes` | Soluções e suas dores |
 | PATCH | `/solucoes/:id` | Atualiza status da solução |
+| DELETE | `/empresas/:id` | Remove empresa (409 se houver contatos ou entrevistas) |
 | GET/POST | `/segmentos`, `/categorias_dores`, `/categorias_perguntas` | Listas de apoio |
 
 Exemplo de entrevista:
@@ -103,4 +115,6 @@ Exemplo de entrevista:
 
 ## Status do projeto
 
-MVP em desenvolvimento. Backend funcional (RF01 a RF05); interface ainda não iniciada.
+MVP funcional de ponta a ponta: backend e interface cobrem RF01 a RF05 — cadastro de
+empresas e contatos, entrevista com o questionário completo, registro de dores e
+soluções ligadas a elas.

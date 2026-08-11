@@ -35,6 +35,7 @@ O sistema será inicialmente utilizado pelo próprio pesquisador como ferramenta
 - Cadastro de contatos por empresa (RF02)
 - Registro de entrevistas com respostas às perguntas da pesquisa (RF03)
 - Registro de dores por entrevista (RF04)
+- Roteiro da pesquisa em [`docs/requirements/perguntas-pesquisa.md`](docs/requirements/perguntas-pesquisa.md)
 - Registro de soluções digitais ligadas às dores (RF05)
 
 ## Tecnologias
@@ -58,7 +59,8 @@ Crie o banco `pesquisa360` no Postgres e então:
 ```bash
 npm run db:schema   # cria as tabelas (banco novo)
 npm run db:ajustes  # só se o banco foi criado antes destas colunas
-npm run db:seed     # segmentos, categorias e perguntas iniciais
+npm run db:seed     # segmentos, categorias e o roteiro da pesquisa
+npm run db:roteiro  # só se o banco tinha perguntas anteriores ao roteiro atual
 npm run dev         # http://localhost:3333
 npm test
 ```
@@ -71,6 +73,7 @@ A interface abre em `http://localhost:3333`. Verificação rápida da API: `GET 
 |---|---|---|
 | Empresas | `index.html` | Lista com busca e filtros, cadastro e exclusão |
 | Empresa | `empresa.html?id=` | Dados, troca de status, contatos e entrevistas |
+| Entrevistas | `entrevistas.html` | Todas as visitas, com total de dores e filtro por empresa |
 | Nova entrevista | `nova-entrevista.html?empresa=` | Questionário montado a partir de `/perguntas` |
 | Entrevista | `entrevista.html?id=` | Respostas registradas e cadastro de dores |
 | Soluções | `solucoes.html` | Cadastro ligado às dores e acompanhamento do status |
@@ -86,6 +89,7 @@ A interface abre em `http://localhost:3333`. Verificação rápida da API: `GET 
 | GET/POST | `/empresas/:id/contatos` | Contatos da empresa |
 | PATCH | `/contatos/:id` | Atualiza contato |
 | GET | `/perguntas` | Perguntas ativas, na ordem, com opções |
+| GET | `/entrevistas?empresa_id=` | Todas as entrevistas, com total de dores |
 | GET | `/empresas/:id/entrevistas` | Entrevistas da empresa |
 | GET | `/entrevistas/:id` | Entrevista com respostas e dores |
 | POST | `/entrevistas` | Registra entrevista + respostas (transação) |

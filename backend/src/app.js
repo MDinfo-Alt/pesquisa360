@@ -1,4 +1,6 @@
+import { fileURLToPath } from 'node:url'
 import Fastify from 'fastify'
+import fastifyStatic from '@fastify/static'
 import pool from './db/connection.js'
 import empresasRoutes from './routes/empresas.routes.js'
 import catalogosRoutes from './routes/catalogos.routes.js'
@@ -45,6 +47,11 @@ app.get('/db-health', async () => {
         database: 'conectado',
         time: result.rows[0].now
     }
+})
+
+// Interface: arquivos estáticos de ../frontend servidos na raiz.
+await app.register(fastifyStatic, {
+    root: fileURLToPath(new URL('../../frontend', import.meta.url))
 })
 
 await app.register(empresasRoutes)

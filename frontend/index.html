@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pesquisa360 — Empresas</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>
+            Pesquisa360
+            <nav>
+                <a href="index.html" aria-current="page">Empresas</a>
+                <a href="solucoes.html">Soluções</a>
+            </nav>
+        </h1>
+    </header>
+
+    <main>
+        <section>
+            <h2>Nova empresa</h2>
+
+            <form id="form-empresa">
+                <label>
+                    Nome *
+                    <input name="nome" required maxlength="150">
+                </label>
+
+                <label>
+                    Segmento *
+                    <span class="linha">
+                        <select name="segmento_id" required></select>
+                        <button type="button" id="novo-segmento">+ novo</button>
+                    </span>
+                </label>
+
+                <label>
+                    Cidade
+                    <input name="cidade" maxlength="100">
+                </label>
+
+                <label>
+                    Bairro
+                    <input name="bairro" maxlength="100">
+                </label>
+
+                <label>
+                    WhatsApp
+                    <input name="telefone_whatsapp" maxlength="30">
+                </label>
+
+                <label>
+                    Endereço
+                    <input name="endereco" maxlength="200">
+                </label>
+
+                <label>
+                    Site
+                    <input name="site" maxlength="255">
+                </label>
+
+                <label>
+                    Instagram
+                    <input name="instagram" maxlength="255">
+                </label>
+
+                <label>
+                    Funcionários
+                    <input name="qtd_funcionarios" type="number" min="0">
+                </label>
+
+                <label class="largo">
+                    Observações
+                    <textarea name="observacoes" rows="2"></textarea>
+                </label>
+
+                <button type="submit">Cadastrar</button>
+            </form>
+
+            <p id="aviso" hidden></p>
+        </section>
+
+        <section>
+            <h2>Empresas</h2>
+
+            <div class="filtros">
+                <input id="busca" placeholder="Buscar por nome">
+                <select id="filtro-status"></select>
+                <select id="filtro-segmento"></select>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Segmento</th>
+                        <th>Cidade</th>
+                        <th>WhatsApp</th>
+                        <th>Status</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="lista"></tbody>
+            </table>
+        </section>
+    </main>
+
+    <script type="module" src="app.js"></script>
+</body>
+</html>

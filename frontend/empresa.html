@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pesquisa360 — Empresa</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>
+            <a href="index.html">Pesquisa360</a>
+            <nav>
+                <a href="index.html">Empresas</a>
+                <a href="solucoes.html">Soluções</a>
+            </nav>
+        </h1>
+    </header>
+
+    <main>
+        <section>
+            <p><a href="index.html">← Todas as empresas</a></p>
+
+            <h2 id="nome">Carregando...</h2>
+
+            <dl id="dados"></dl>
+
+            <label class="status">
+                Status
+                <select id="status"></select>
+            </label>
+
+            <p id="aviso" hidden></p>
+        </section>
+
+        <section>
+            <h2>Contatos</h2>
+
+            <form id="form-contato">
+                <label>
+                    Nome *
+                    <input name="nome" required maxlength="150">
+                </label>
+
+                <label>
+                    Cargo
+                    <input name="cargo" maxlength="100">
+                </label>
+
+                <label>
+                    WhatsApp
+                    <input name="telefone_whatsapp" maxlength="30">
+                </label>
+
+                <label>
+                    E-mail
+                    <input name="email" type="email" maxlength="150">
+                </label>
+
+                <button type="submit">Adicionar contato</button>
+            </form>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Cargo</th>
+                        <th>WhatsApp</th>
+                        <th>E-mail</th>
+                    </tr>
+                </thead>
+                <tbody id="contatos"></tbody>
+            </table>
+        </section>
+
+        <section>
+            <h2>Entrevistas</h2>
+
+            <p><a id="nova-entrevista" class="acao" href="#">+ Nova entrevista</a></p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Data</th>
+                        <th>Contato</th>
+                        <th>Observações</th>
+                    </tr>
+                </thead>
+                <tbody id="entrevistas"></tbody>
+            </table>
+        </section>
+    </main>
+
+    <script type="module" src="empresa.js"></script>
+</body>
+</html>

@@ -51,7 +51,7 @@ Pré-requisitos: Node.js 20+ e PostgreSQL.
 ```bash
 cd backend
 npm install
-cp .env.example .env      # ajuste usuário/senha do Postgres
+cp .env.example .env      # ajuste o Postgres e defina AUTH_USER / AUTH_PASSWORD
 ```
 
 Crie o banco `pesquisa360` no Postgres e então:
@@ -77,6 +77,39 @@ A interface abre em `http://localhost:3333`. Verificação rápida da API: `GET 
 | Nova entrevista | `nova-entrevista.html?empresa=` | Questionário montado a partir de `/perguntas` |
 | Entrevista | `entrevista.html?id=` | Respostas registradas e cadastro de dores |
 | Soluções | `solucoes.html` | Cadastro ligado às dores e acompanhamento do status |
+
+## Hospedagem (Render + Neon)
+
+O sistema exige `AUTH_USER` e `AUTH_PASSWORD` — sem eles o servidor não sobe, para
+não ficar aberto na internet. O navegador pede usuário e senha na primeira visita.
+
+**1. Banco no [Neon](https://neon.tech)**
+
+Crie um projeto e copie a connection string (`postgresql://...?sslmode=require`).
+Com ela na mão, rode as migrações a partir da sua máquina:
+
+```bash
+cd backend
+DATABASE_URL="a-string-do-neon" npm run db:schema
+DATABASE_URL="a-string-do-neon" npm run db:seed
+```
+
+**2. Aplicação no [Render](https://render.com)**
+
+Novo Web Service apontando para o repositório, com:
+
+| Campo | Valor |
+|---|---|
+| Root Directory | `backend` |
+| Build Command | `npm install` |
+| Start Command | `npm start` |
+| Health Check Path | `/health` |
+
+Variáveis de ambiente: `DATABASE_URL` (a do Neon), `AUTH_USER` e `AUTH_PASSWORD`.
+Não defina `PORT` — o Render injeta a dele.
+
+O plano gratuito hiberna após 15 minutos sem acesso; a primeira visita depois
+disso leva cerca de 30 segundos.
 
 ## API
 

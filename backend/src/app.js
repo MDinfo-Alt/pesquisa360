@@ -1,6 +1,7 @@
 import { fileURLToPath } from 'node:url'
 import Fastify from 'fastify'
 import fastifyStatic from '@fastify/static'
+import basicAuth from './auth.js'
 import pool from './db/connection.js'
 import empresasRoutes from './routes/empresas.routes.js'
 import catalogosRoutes from './routes/catalogos.routes.js'
@@ -12,6 +13,9 @@ import solucoesRoutes from './routes/solucoes.routes.js'
 const app = Fastify({
     logger: true
 })
+
+// Antes de qualquer rota, inclusive os arquivos estáticos.
+app.addHook('onRequest', basicAuth)
 
 // Erros de integridade do Postgres viram 400/409 em vez de 500.
 app.setErrorHandler((error, request, reply) => {

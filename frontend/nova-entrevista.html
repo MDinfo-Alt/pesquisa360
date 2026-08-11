@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pesquisa360 — Nova entrevista</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>
+            <a href="index.html">Pesquisa360</a>
+            <nav>
+                <a href="index.html">Empresas</a>
+                <a href="solucoes.html">Soluções</a>
+            </nav>
+        </h1>
+    </header>
+
+    <main>
+        <form id="form-entrevista">
+            <section>
+                <p><a id="voltar" href="index.html">← Voltar para a empresa</a></p>
+
+                <h2 id="titulo">Nova entrevista</h2>
+
+                <div class="campos">
+                    <label>
+                        Data *
+                        <input name="data_entrevista" type="date" required>
+                    </label>
+
+                    <label>
+                        Entrevistado
+                        <select name="contato_id"></select>
+                    </label>
+
+                    <label class="largo">
+                        Observações da visita
+                        <textarea name="observacoes" rows="2"></textarea>
+                    </label>
+                </div>
+
+                <p id="aviso" hidden></p>
+            </section>
+
+            <div id="perguntas"></div>
+
+            <section>
+                <button type="submit">Salvar entrevista</button>
+            </section>
+        </form>
+    </main>
+
+    <script type="module" src="nova-entrevista.js"></script>
+</body>
+</html>

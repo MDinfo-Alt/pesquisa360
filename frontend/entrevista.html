@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pesquisa360 — Entrevista</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>
+            <a href="index.html">Pesquisa360</a>
+            <nav>
+                <a href="index.html">Empresas</a>
+                <a href="solucoes.html">Soluções</a>
+            </nav>
+        </h1>
+    </header>
+
+    <main>
+        <section>
+            <p><a id="voltar" href="index.html">← Voltar para a empresa</a></p>
+
+            <h2 id="titulo">Carregando...</h2>
+
+            <dl id="dados"></dl>
+
+            <p id="aviso" hidden></p>
+        </section>
+
+        <section>
+            <h2>Respostas</h2>
+            <dl id="respostas"></dl>
+        </section>
+
+        <section>
+            <h2>Dores identificadas</h2>
+
+            <div id="dores"></div>
+
+            <details>
+                <summary>Registrar nova dor</summary>
+
+                <form id="form-dor">
+                    <label class="largo">
+                        Título *
+                        <input name="titulo" required maxlength="150">
+                    </label>
+
+                    <label>
+                        Categoria *
+                        <span class="linha">
+                            <select name="categoria_id" required></select>
+                            <button type="button" id="nova-categoria">+ nova</button>
+                        </span>
+                    </label>
+
+                    <label>
+                        Frequência
+                        <input name="frequencia" maxlength="30" placeholder="diária, semanal...">
+                    </label>
+
+                    <label>
+                        Impacto
+                        <input name="impacto" maxlength="30" placeholder="alto, médio, baixo">
+                    </label>
+
+                    <label class="largo">
+                        Descrição *
+                        <textarea name="descricao" rows="3" required></textarea>
+                    </label>
+
+                    <label class="largo">
+                        Como resolvem hoje
+                        <textarea name="solucao_atual" rows="2"></textarea>
+                    </label>
+
+                    <button type="submit">Registrar dor</button>
+                </form>
+            </details>
+        </section>
+    </main>
+
+    <script type="module" src="entrevista.js"></script>
+</body>
+</html>

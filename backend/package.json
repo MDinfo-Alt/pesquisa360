@@ -10,7 +10,8 @@
     "test": "node --test",
     "db:schema": "node scripts/run-sql.js ../database/schema.sql",
     "db:ajustes": "node scripts/run-sql.js ../database/002-ajustes.sql",
-    "db:seed": "node scripts/run-sql.js ../database/seed.sql"
+    "db:seed": "node scripts/run-sql.js ../database/seed.sql",
+    "db:roteiro": "node scripts/run-sql.js ../database/003-roteiro-pesquisa.sql"
   },
   "keywords": [],
   "author": "",

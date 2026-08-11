@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pesquisa360 — Soluções</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>
+            <a href="index.html">Pesquisa360</a>
+            <nav>
+                <a href="index.html">Empresas</a>
+                <a href="solucoes.html" aria-current="page">Soluções</a>
+            </nav>
+        </h1>
+    </header>
+
+    <main>
+        <section>
+            <h2>Nova solução</h2>
+
+            <form id="form-solucao">
+                <label class="largo">
+                    Nome *
+                    <input name="nome" required maxlength="150">
+                </label>
+
+                <label class="largo">
+                    Descrição *
+                    <textarea name="descricao" rows="2" required></textarea>
+                </label>
+
+                <label class="largo">
+                    Como funcionaria
+                    <textarea name="funcionamento_proposto" rows="2"></textarea>
+                </label>
+
+                <label class="largo">
+                    Benefício esperado
+                    <textarea name="beneficio_esperado" rows="2"></textarea>
+                </label>
+
+                <label>
+                    Complexidade
+                    <select name="complexidade">
+                        <option value="">Não avaliada</option>
+                        <option value="BAIXA">Baixa</option>
+                        <option value="MEDIA">Média</option>
+                        <option value="ALTA">Alta</option>
+                    </select>
+                </label>
+
+                <fieldset class="largo">
+                    <legend>Dores que esta solução resolve *</legend>
+                    <div id="dores"></div>
+                </fieldset>
+
+                <button type="submit">Cadastrar solução</button>
+            </form>
+
+            <p id="aviso" hidden></p>
+        </section>
+
+        <section>
+            <h2>Soluções registradas</h2>
+            <div id="lista"></div>
+        </section>
+    </main>
+
+    <script type="module" src="solucoes.js"></script>
+</body>
+</html>
